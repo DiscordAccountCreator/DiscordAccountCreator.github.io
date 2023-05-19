@@ -8,8 +8,8 @@
     function showAlert() {
       var userInput = document.getElementById("texto").value;
 
-      if (userInput.length !== 18) {
-        alert("⚠️ El ID de cuenta debe tener 18 dígitos. ⚠️");
+      if (userInput.length < 17 || userInput.length > 19) {
+        alert("⚠️ El ID de cuenta debe tener entre 17 y 19 dígitos. ⚠️");
         return;
       }
 
