@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DiscordAccountCreator</title>
+  <script>
+    var cooldownActive = false;
+
+    function showAlert() {
+      var userInput = document.getElementById("texto").value;
+      if (userInput.length === 18 && !cooldownActive) {
+        alert("Confirm Account?");
+        document.getElementById("texto").value = "";
+        countdown();
+      } else {
+        alert("Please enter a 18-digit number or wait for the cooldown period.");
+      }
+    }
+
+    function countdown() {
+      var countdownElement = document.getElementById("countdown");
+      var count = 30 * 24 * 60 * 60; // 30 días en segundos
+
+      var countdownInterval = setInterval(function() {
+        var days = Math.floor(count / (24 * 60 * 60));
+        var hours = Math.floor((count % (24 * 60 * 60)) / (60 * 60));
+        var minutes = Math.floor((count % (60 * 60)) / 60);
+        var seconds = count % 60;
+
+        countdownElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+
+        count--;
+
+        if (count < 0) {
+          clearInterval(countdownInterval);
+          cooldownActive = false;
+          countdownElement.innerHTML = "cositas se creo la cuenta ejej";
+        }
+      }, 1000);
+
+      cooldownActive = true;
+      setTimeout(function() {
+        cooldownActive = false;
+      }, 50 * 60 * 1000); // 50 minutos en milisegundos
+    }
+  </script>
+</head>
+<body>
+  <input type="text" id="texto">
+  <button onclick="showAlert()">Create Discord Account</button>
+  <p id="countdown"></p>
+</body>
+</html>
